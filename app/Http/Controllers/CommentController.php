@@ -51,7 +51,7 @@ class CommentController extends Controller
             if (!empty($friend))    //If Log in User is Friend of Which user own This Post Then They Allow For Comment
             {
                 if (empty($req->file)) {
-                    $comment =   DB::table('comments')->insert([
+                    $comment =   Comment::create([
                         'comment' => $req->comment,
                         'post_id' => $postid,
                         'user_id' => $user,

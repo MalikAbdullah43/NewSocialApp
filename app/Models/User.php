@@ -52,7 +52,7 @@ class User extends Authenticatable
     ];
 
     
-    public function Post(){
+    public  function Post(){
         return $this->hasMany(Post::class);
     }
     //FriendShip Relationships

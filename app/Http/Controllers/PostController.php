@@ -42,11 +42,10 @@ class PostController extends Controller
     //This Function Use For Check Which posts User Post
     public function userPosts(Request $req)
     {
-
         $userid = $req->user_data->id;
-        $user = User::with('Post')->where('id', $userid)->get();
-        $post = DB::table('comments')->select('id', 'comment', 'file', 'user_id as user')->where('post_id', $user[0]->post[0]->id)->get();
-        return new UserPosts(["Post" => $user[0]->Post]);
+        $user = User::findorfail(5);
+        $post =  Comment::with('Post')->where('id', $userid)->get();
+        return new UserPosts($user);
     }
     //This Function For User Which Post User Want to Update
     public function postUpdate(PostRequest $req)

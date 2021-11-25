@@ -16,7 +16,7 @@ class UserVerify
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {
+    {   
         $jwt = $request->bearerToken();
         if(!empty($jwt)){
         $data = DB::table('users')

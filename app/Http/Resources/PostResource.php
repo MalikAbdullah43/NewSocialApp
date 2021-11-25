@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Resources;
-use App\Models\User as User;
+
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\PostResource;
-class UserPosts extends JsonResource
+use Illuminate\Support\Facades\DB;
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,14 @@ class UserPosts extends JsonResource
      */
     public function toArray($request)
     {
+        // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'posts' => PostResource::collection($this->Post()->get()),
+            'text' => $this->text,
+            'access' => $this->access,
+            'file' => $this->file,
+            'created_at' => $this->created_at,
+            'comment' => DB::table('comments')->where('post_id',$this->id)->get(),
         ];
     }
 }
